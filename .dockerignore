@@ -1,0 +1,17 @@
+# 构建时排除无关文件，缩小镜像并加快构建
+.git
+.gitignore
+**/__pycache__
+**/*.py[cod]
+**/.venv
+**/venv
+**/node_modules
+**/dist
+data/tmp
+data/cache
+data/history
+*.log
+.env
+backend/.env
+.obsidian
+tests

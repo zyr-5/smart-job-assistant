@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+.env
+.venv/
+venv/
+node_modules/
+dist/
+
+# 运行时数据：缓存、上传临时文件、历史记录
+# 注意 data/history/ 存的是真实简历与 JD 的分析结果，不要提交到公开仓库
+data/tmp/
+data/cache/
+data/history/
+data/index.json
+data/config.json
+
+backend/.env
+*.log
+.DS_Store
+
+# 测试与工具产物
+.coverage
+htmlcov/
+.pytest_cache/
+_baidu_sample.html

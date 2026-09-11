@@ -1,0 +1,28 @@
+# Render 部署蓝图（免费方案）
+# 用法：把仓库推到 GitHub 后，在 Render 选 "New > Blueprint"，指向本仓库即可。
+#
+# 免费层注意事项（实测本应用的真实耗时：匹配 ~11s / 面试题 ~9s / 公司检索 ~6s）：
+#   1. 空闲 15 分钟会休眠，下次访问冷启动需 30-60 秒 —— 投递简历前先自己访问一次把它唤醒
+#   2. 免费层无持久磁盘，data/ 内的缓存与历史上传在重新部署后清空（功能不受影响，只是缓存失效）
+#   3. 若 company.research 偶发超过平台请求上限，前端已内置超时提示，用户可重试
+services:
+  - type: web
+    name: smart-job-assistant
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    region: singapore
+    healthCheckPath: /api/health
+    envVars:
+      - key: DEEPSEEK_API_KEY
+        sync: false          # 在 Render 控制台手动填入，不写进仓库
+      - key: DEEPSEEK_BASE_URL
+        value: https://api.deepseek.com
+      - key: DEEPSEEK_MODEL
+        value: deepseek-chat
+      - key: MOCK_LLM
+        value: "false"
+      - key: DATA_DIR
+        value: /data
+      - key: COMPANY_CACHE_TTL_DAYS
+        value: "3"
